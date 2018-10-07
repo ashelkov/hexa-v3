@@ -3,13 +3,14 @@ import styled from 'styled-components';
 // components
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import HexagonGrid from '../../components/HexagonGrid/HexagonGrid';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class GamePage extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      isSidebarOpen: true,
+      isSidebarOpen: false,
     };
   }
 
@@ -33,9 +34,9 @@ export default class GamePage extends React.PureComponent {
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni
             sequi quis sapiente esse necessitatibus dignissimos natus suscipit
-            hic quos, illo ipsam accusamus veniam debitis repellat, laudantium,
-            fugit repudiandae nam! Doloribus!
+            hic quos.
           </p>
+          <HexagonGrid />
         </Content>
       </div>
     );
