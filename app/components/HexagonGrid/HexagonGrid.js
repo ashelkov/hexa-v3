@@ -89,8 +89,8 @@ class HexagonGrid extends React.Component {
 
       for (var j = -1; j <= m; ++j) {
         for (var i = -1; i <= n; ++i) {
-          let y = j * 2,
-            x = (i + (j & 1) / 2) * 2;
+          let y = j * 2;
+          let x = (i + (j & 1) / 2) * 2;
           arcs.push(
             [[x, y - 1], [1, 1]],
             [[x + 1, y], [0, 1]],
@@ -101,7 +101,7 @@ class HexagonGrid extends React.Component {
 
       for (var j = 0, q = 3; j < m; ++j, q += 6) {
         for (var i = 0; i < n; ++i, q += 3) {
-          if (j < 2) continue; // ignore first 2 rows
+          if (j < 1) continue; // ignore first 2 rows
           if (i === n - 1) continue; // ignore last column
           if (i === 0 && j % 2 === 1) continue; // ignore first cell of odd rows
           geometries.push({
@@ -117,7 +117,7 @@ class HexagonGrid extends React.Component {
               ],
             ],
             fill: Math.random() > (i / n) * 2,
-            x: j - 2,
+            x: j - 1,
             y: i,
           });
         }
@@ -133,8 +133,8 @@ class HexagonGrid extends React.Component {
     }
 
     function hexProjection(radius) {
-      let dx = radius * 2 * Math.sin(Math.PI / 3),
-        dy = radius * 1.5;
+      let dx = radius * 2 * Math.sin(Math.PI / 3);
+      let dy = radius * 1.5;
       return {
         stream(stream) {
           return {
@@ -168,6 +168,16 @@ export default HexagonGrid;
 
 const Grid = styled.div`
   margin: 20px 0;
+
+  svg {
+    overflow: visible;
+
+    .hexagon,
+    .mesh,
+    .border {
+      transform: translate(0, 10px);
+    }
+  }
 
   .hexagon {
     fill: ${colors.secondary};

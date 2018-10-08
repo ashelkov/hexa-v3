@@ -30,11 +30,11 @@ export default class GamePage extends React.PureComponent {
         />
         <Sidebar isOpen={isSidebarOpen} />
         <Content pushed={isSidebarOpen}>
-          <h2>This is the GamePage!</h2>
+          <h3>This is the GamePage!</h3>
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni
-            sequi quis sapiente esse necessitatibus dignissimos natus suscipit
-            hic quos.
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni squi
+            quis sapiente esse necessitatibus dignissimos natus suscipit hic
+            quos.
           </p>
           <HexagonGrid />
         </Content>
