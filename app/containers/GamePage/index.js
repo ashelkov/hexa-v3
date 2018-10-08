@@ -1,12 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import T from 'prop-types';
+// redux
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import reducer, { startNewGame } from './redux/reducer';
+import saga from './redux/saga';
 // components
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import HexagonGrid from '../../components/HexagonGrid/HexagonGrid';
+import Button from '../../components/Button/Button';
+// utils
+import injectReducer from '../../utils/injectReducer';
+import injectSaga from '../../utils/injectSaga';
 
-/* eslint-disable react/prefer-stateless-function */
-export default class GamePage extends React.PureComponent {
+class GamePage extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -19,6 +28,10 @@ export default class GamePage extends React.PureComponent {
       isSidebarOpen: !prevState.isSidebarOpen,
     }));
 
+  generateNew = () => {
+    this.props.startNewGame();
+  };
+
   render() {
     const { isSidebarOpen } = this.state;
 
@@ -30,18 +43,36 @@ export default class GamePage extends React.PureComponent {
         />
         <Sidebar isOpen={isSidebarOpen} />
         <Content pushed={isSidebarOpen}>
-          <h3>This is the GamePage!</h3>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni squi
-            quis sapiente esse necessitatibus dignissimos natus suscipit hic
-            quos.
-          </p>
-          <HexagonGrid />
+          <CentralPanel>
+            <Button onClick={this.generateNew}>Generate New</Button>
+            <HexagonGrid />
+          </CentralPanel>
         </Content>
       </div>
     );
   }
 }
+
+const withReducer = injectReducer({ key: 'game', reducer });
+const withSaga = injectSaga({ key: 'game', saga });
+const withConnect = connect(
+  state => ({
+    field: state.getIn('game', 'field'),
+  }),
+  {
+    startNewGame,
+  },
+);
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(GamePage);
+
+GamePage.propTypes = {
+  startNewGame: T.func.isRequired,
+};
 
 const Content = styled.div`
   padding: 10px 20px;
@@ -54,4 +85,9 @@ const Content = styled.div`
   `} p {
     color: #949ba2;
   }
+`;
+
+const CentralPanel = styled.div`
+  width: 800px;
+  margin: 20px auto;
 `;

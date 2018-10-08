@@ -41,10 +41,10 @@ class HexagonGrid extends React.Component {
       .attr('class', 'mesh')
       .attr('d', path);
 
-    const border = svg
-      .append('path')
-      .attr('class', 'border')
-      .call(redraw);
+    // const border = svg
+    //   .append('path')
+    //   .attr('class', 'border')
+    //   .call(redraw);
 
     let mousing = 0;
 
@@ -57,7 +57,7 @@ class HexagonGrid extends React.Component {
     function mousemove(d) {
       if (mousing) {
         d3.select(this).classed('fill', (d.fill = mousing > 0));
-        border.call(redraw);
+        // border.call(redraw);
       }
     }
 
