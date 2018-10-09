@@ -1,9 +1,12 @@
-// import { createSelector } from 'reselect';
-// import { initialState } from './reducer';
+import { createSelector } from 'reselect';
+import { initialState } from '../redux/reducer';
 
-// const selectHome = state => state.get('home', initialState);
+const selectGameState = state => state.get('game', initialState);
 
-// const makeSelectUsername = () =>
-//   createSelector(selectHome, homeState => homeState.get('username'));
+const selectField = () =>
+  createSelector(selectGameState, gameState => gameState.get('field'));
 
-// export { selectHome, makeSelectUsername };
+const selectPalette = () =>
+  createSelector(selectGameState, gameState => gameState.get('palette'));
+
+export { selectGameState, selectField, selectPalette };

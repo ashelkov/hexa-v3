@@ -47,7 +47,7 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write"
   },
-  "lint-staged": {
+  "_lint-staged": {
     "*.js": [
       "npm run lint:eslint:fix",
       "git add --force"
@@ -57,7 +57,7 @@
       "git add --force"
     ]
   },
-  "pre-commit": "lint:staged",
+  "_pre-commit": "lint:staged",
   "babel": {
     "plugins": [
       "styled-components"
